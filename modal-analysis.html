@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>physical-modelling-synthesis</title>
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="container">
+      <h1>Running Modal Analysis </h1>
+      <p>
+      Next, we are going to simulate the vibraphone bar as if it were resonating.
+      We import the model into our simulation software, mesh it, apply pin constraints where necessary,
+      and apply a
+      material. Then we change options under manage in order to determine how many overtones we want to simulate.
+      80 overtones took
+      about half an hour to simulate. 20 overtones sounds a bit less natural,
+      but takes only three minutes to simulate on my machine. Depending on what sound you are looking for, I
+      recommend first testing it with less overtones, and when you feel like you are going in the right
+      direction, bump it up to 300, hit start, and go grab a coffee. Since we probably won't exceed a bitrate
+      of 44.1khz, we can set our simulation up to only solve for modes with a frequency within the range of
+      our audio quality. This means our upper limit should be 22050hz, half the bitrate.
+      </p>
+
+      <p>
+      After everything solves, we can move
+      on to the results. This is where things start getting interesting. Via a dropdown menu,
+      you can examine how each of the overtones distorts the model. At first, things look quite similar to
+      our diagram of guitar string overtones.
+      </p>
+      <div class="center">
+
+      	<img src="./res/vibe-mode-one.png" width="400px"></img><br>
+      	<i>
+      	A side view of the fundamental (first) mode of the bar<br>
+      	</i>
+      	<img src="./res/vibe-mode-two.png" width="400px"></img><br>
+      	<i>
+      	A side view of the first overtone (second mode)<br>
+      	</i>
+      	<img src="./res/vibe-mode-three.png" width="400px"></img><br>
+      	<i>
+      	A side view of the second overtone (third mode)<br>
+      	</i>
+      </div>
+      <p>
+      Unlike our two-dimensional representation of a string, this model has harmonics running
+      through it in three dimensions. We don’t see three-dimensional warpage until we get to some of
+      the higher harmonics.
+      </p>
+      <div class="center">
+      	<img src="./res/vibe-mode-fourteen.png" width="400px"></img><br>
+      	<i>
+      	Fig. 3.5: A perspective view of the thirteenth overtone (fourteenth mode)<br>
+      	</i>
+      	<img src="./res/vibe-mode-nineteen.png" width="400px"></img><br>
+      	<i>
+      	Fig. 3.6: A top view of the eighteenth overtone (nineteenth mode)<br>
+      	</i>
+      </div>
+      <p>
+      	<i>Note: Since the fundamental mode is not considered an overtone, when I say "overtone
+      	eighteen" I am talking about mode nineteen. Sorry if this is a bit confusing.</i>
+      </p>
+      </p>
+      Keep in mind that the displacement here is heavily exaggerated. Otherwise, with the exception
+      of the first few modes, it would be very hard to see any warpage. Looking through the
+      modes from 1 to 20, it becomes apparent that the force required to deform the model increases.
+      For example, bending the bar to look like mode 19 would be far more difficult than bending it
+      to look like mode 1. This is a good visualization of how harmonic decay occurs in a solid body.
+      </p>
+      <p>
+      Once you are done exploring all of the cool overtones running through your model, click
+      the report command, and then click preview. This is where we are going to get our actual
+      data to work with. A browser window should open displaying the results of the simulation.
+      Scroll on down to <i>Result Summary</i>, and copy the table into a blank file. Omit the header row so
+      the data looks like the table in <i>Fig. 3.7</i>.
+      </p>
+
+      <div class="center">
+      	<table style="margin:auto" style="width:500px">
+      		<tr>
+      			<td>Mode 1: 315.3 Hz</td>
+      			<td>0.000000363</td>
+      			<td>0.486106239</td>
+      			<td>0.000001727</td>
+      		</tr>
+      		<tr>
+      			<td>Mode 2: 690.5 Hz</td>
+      			<td>0.000001465</td>
+      			<td>0.007727362</td>
+      			<td>0.003820182</td>
+      		</tr>
+      		<tr>
+      			<td>Mode 3: 1339 Hz</td>
+      			<td>0.00001246</td>
+      			<td>54.2734802</td>
+      			<td>0.000000009</td>
+      		</tr>
+      		<tr>
+      			<td>Mode 4: 2249 Hz</td>
+      			<td>0.003058177</td>
+      			<td>0.000350695</td>
+      			<td>0.036234496</td>
+      		</tr>
+      		<tr>
+      			<td>Mode 5: 2324 Hz</td>
+      			<td>0.099320943</td>
+      			<td>0.000145085</td>
+      			<td>0.000751216</td>
+      		</tr>
+      		<tr>
+      			<td>Mode 6: 3719 Hz</td>
+      			<td>0.019249949</td>
+      			<td>1.31738205</td>
+      			<td>0.000004251</td>
+      		</tr>
+      		<tr>
+      			<td>Mode 7: 3850 Hz</td>
+      			<td>0.018746624</td>
+      			<td>0.000102334</td>
+      			<td>0.000007663</td>
+      		</tr>
+      		<tr>
+      			<td>Mode 8: 4034 Hz</td>
+      			<td>0.043879572</td>
+      			<td>8.35887417</td>
+      			<td>0.000004925</td>
+      		</tr>
+      	</table><br>
+      	<i>
+      		Fig. 3.7: The first eight rows of the harmonic content data table
+      	</i>
+      </div>
+      <p>
+      This data was derived from the aluminum 360x60mm vibraphone bar from above. The first column
+      contains the frequency for each mode. The other three columns contain the x, y,
+      and z participation factors for each mode. Based on these values, I am pretty sure
+      we can make an educated guess as to how loud the harmonic will be in the final
+      waveform by calculating the magnitude of the resulting vector in 3-space. After
+      parsing this table in Python and building an array of frequencies and amplitude
+      pairs, we can now begin to construct a waveform.
+      </p>
+    </div>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="./lib/styles/github.css">
+    <script src="./lib/highlight.js"></script>
+
+    <title>physical-modelling-synthesis</title>
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <div class="container">
+      <h1>Generating the Vibraphone Bar</h1>
+
+      <p>
+       A Python script to generate a model of a vibraphone bar was created. The script utilizes
+       the Fusion 360 API to perform an extrude operation on a sketch. The sketch is defined
+       by four inputs: length, width, height, and tone.
+      </p>
+
+      <p>
+       The following pseudocode describes the entire modelling process:
+      </p>
+      <pre><code class="python">
+      # Sketch the rectangular outline
+      sketch_line (Point (0, 0, 0), Point (L, 0, 0))
+      sketch_line (Point (L, 0, 0), Point (L, H, 0))
+      sketch_line (Point (L, H, 0), Point (0, H, 0))
+      sketch_line (Point (0, H, 0), Point (0, 0, 0))
+
+      # Sketch the holes
+      hole_offset = L * IDIOPHONE_NODE_RATIO
+      sketch_circle (Point ( hole_offset, H / 2, 0), 0.4)
+      sketch_circle (Point ( L - hole_offset, H / 2, 0), 0.4)
+
+      # Sketch the arc
+      points = []
+
+      points.add (Point(hole_offset, 0, 0))
+      points.add (Point(L / 2,  H * T, 0))
+      points.add (Point(L - hole_offset, 0, 0))
+
+      sketch_spline (points)
+
+      # Create the extrusion
+      create_extrude (W)
+
+      </code></pre>
+
+      <p>
+       The full code can be found
+<a href="https://github.com/OldGregg570/physical-modelling-synthesis/blob/master/src/idiophone-bar.py">here</a>.
+      </p>
+
+
+      <h2> Usage </h2>
+      <p>
+       To run the script in Fusion 360:
+       <ol>
+        <li> Save <a href="https://raw.githubusercontent.com/OldGregg570/physical-modelling-synthesis/master/src/idiophone-bar.py">this</a> script somewhere </li>
+        <li> Start Fusion 360 </li>
+        <li> From the menu, select ADD-INS > Scripts and Add-ins ... </li>
+        <li> Click the green "+" icon </li>
+        <li> Browse to the previously save script and click "open" </li>
+        <li> Select the added script and click "run" </li>
+       </ol>
+
+      </p>
+    </div>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>physical-modelling-synthesis</title>
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="container">
+      <h1>Length Estimation</h1>
+      <p>
+       An experiment was carried out to determine the parameters of a bar with a specific
+       target pitch. The following text outlines the experiment background, procedure, and results.
+      </p>
+      <h3>Background</h3>
+      <p>
+       The pitch of a vibraphone bar is determined by its size. A longer bar produces a lower tone.
+       For this experiment, the target note is B4, 493.9 hz.
+      </p>
+
+      <h3>Procedure</h3>
+      <p>
+       The following tools and inputs are required for this experiment:
+       <ul>
+        <li><a href="http://www.autodesk.com/education/free-software/fusion-360">Fusion 360</a></li>
+        <li><a href="https://github.com/OldGregg570/physical-modelling-synthesis/blob/master/src/idiophone-bar.py">idiophone-bar.py</a></li>
+       </ul>
+      </p>
+
+      <p>
+       Trial and error can be used to determine the length of the bar that produces the target
+       frequency. The script requires input for length, width, height, and tone. The following
+       parameters remain constant:
+
+       <table class="table" style="width: 300px;">
+        <tr>
+         <td>Height: </td> <td> 2.25 in </td>
+        </tr>
+        <tr>
+         <td>Width: </td> <td> 0.50 in </td>
+        </tr>
+        <tr>
+         <td>Tone: </td> <td> 0.8 </td>
+        </tr>
+       </table>
+
+       <i>Note: When running the script, these parameters will be set as default. Only modify the length
+       value for this experiment.</i>
+      </p>
+
+      <p>
+       The experiment is carried out as follows:
+       <ol>
+        <li>Run the script in Fusion 360</li>
+        <li>Input a length value</li>
+        <li>Run modal analysis </li>
+        <li>If the resulting fundamental is not close to the target frequency, adjust the length accordingly </li>
+       </ol>
+      </p>
+
+      <h3>Results</h3>
+      <p>
+       I made some lucky guesses and roughly used a binary search approach for the most part.
+       The trials are recorded in the following table:
+       <table class="table">
+       <thead>
+        <tr><th>Trial No. </th> <th> Length Guess (mm) </th><th> Frequency (hz) </th></tr>
+       </thead>
+       <tbody>
+        <tr><td> 1</td> <td> 350.00 </td><td> 444.7 </td></tr>
+        <tr><td> 3</td> <td> 340.00 </td><td> 466.5 </td></tr>
+        <tr><td> 4</td> <td> 331.00 </td><td> 492.1 </td></tr>
+        <tr><td> 5</td> <td> 330.50 </td><td> 493.6 </td></tr>
+        <tr><td> 6</td> <td> 330.45 </td><td> 493.7 </td></tr>
+        <tr style="background-color: #ddffdd;"><td> 7</td> <td> 330.40 </td><td> 493.9 </td></tr>
+        <tr><td> 2</td> <td> 330.00 </td><td> 495.1 </td></tr>
+
+       </tbody>
+       </table>
+
+      </p>
+      <p>
+       The target length to be used in the next eperiment is <b>330.4 mm</b>.
+      </p>
+    </div>
+  </body>
+</html>
