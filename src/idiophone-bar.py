@@ -1,7 +1,7 @@
 import adsk.core, adsk.fusion, traceback
 import os, math
 
-IDIOPHONE_NODE_RATIO = 0.225
+IDIOPHONE_NODE_RATIO = 0.2242
 
 handlers = []
 app = adsk.core.Application.get()
@@ -45,24 +45,30 @@ class ModalBarCommandCreatedHandler(adsk.core.CommandCreatedEventHandler):
             inputs = args.command.commandInputs
             val = adsk.core.ValueInput.createByReal
 
-            inputs.addValueInput('barLength', 'Bar Length.', 'cm' , val (30.0))
-            inputs.addValueInput('barWidth', 'Bar Width.', 'cm' , val (8.0))
-            inputs.addValueInput('barHeight', 'Bar Height.', 'cm' , val(2.0))
+            inputs.addValueInput('barLength', 'Bar Length.', 'cm' , val (50.0))
+            inputs.addValueInput('barWidth', 'Bar Width.', 'cm' , val (5.715))
+            inputs.addValueInput('barHeight', 'Bar Height.', 'cm' , val(1.27))
             inputs.addValueInput('brightness', 'Brightness', '' , val(0.8))
-
 
         except:
             ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
 
-def createExtrude(component, prof, thickness):
+def createExtrude(component, profile, thickness):
+    '''
+    Create an extrude feature on the provided component with the provided profile and thickness
+    '''
     join = adsk.fusion.FeatureOperations.JoinFeatureOperation
     extrudes = component.features.extrudeFeatures
-    extInput = extrudes.createInput(prof, join)
+    extInput = extrudes.createInput(profile, join)
 
     extInput.setDistanceExtent(False, adsk.core.ValueInput.createByReal(thickness))
     return extrudes.add(extInput)
 
 def buildModalBar(l, w, h, b):
+    '''
+    Create a modal bar feature with the provided length, width, and height dimensions. Bar arc
+    is determined by the provided brightness [0, 1.0).
+    '''
     component = createNewComponent()
     if component is None:
         ui.messageBox('New component failed to create', 'New Component Failed')
@@ -74,8 +80,6 @@ def buildModalBar(l, w, h, b):
     sketchCircle = sketch.sketchCurves.sketchCircles.addByCenterRadius
     Point = adsk.core.Point3D.create
 
-    #print sketch
-
     # Sketch the outline
     sketchLine(Point(0, 0, 0), Point(l, 0, 0))
     sketchLine(Point(l, 0, 0), Point(l, h, 0))
@@ -84,8 +88,8 @@ def buildModalBar(l, w, h, b):
 
     # Sketch the holes
     holeOffset = l * IDIOPHONE_NODE_RATIO
-    sketchCircle(Point(holeOffset, h / 2, 0), 0.4)
-    sketchCircle(Point(l - holeOffset, h / 2, 0), 0.4)
+    sketchCircle(Point(holeOffset, h / 2, 0), h / 4)
+    sketchCircle(Point(l - holeOffset, h / 2, 0), h / 4)
 
     # Sketch the arc
     points = adsk.core.ObjectCollection.create()
@@ -96,23 +100,26 @@ def buildModalBar(l, w, h, b):
 
     sketch.sketchCurves.sketchFittedSplines.add(points)
 
-
     # Create the extrusion.
     extOne = createExtrude(component, sketch.profiles[3], w)
 
     extOne.faces[0].body.name = 'Modal Bar'
 
 def run(context):
+    '''
+    Set up the handlers for the ModalBar command and execute it.
+    '''
     try:
         commandId = 'ModalBar'
         cmdDef = ui.commandDefinitions.itemById(commandId)
 
         if not cmdDef:
-            resourceDir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'resources') # absolute resource file path is specified
+            resourceDir = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../resources') # absolute resource file path is specified
             cmdDef = ui.commandDefinitions.addButtonDefinition(commandId, 'Create Modal Bar', 'Create Modal Bar', resourceDir)
 
         onCommandCreated = ModalBarCommandCreatedHandler()
         cmdDef.commandCreated.add(onCommandCreated)
+
         # keep the handler referenced beyond this function
         handlers.append(onCommandCreated)
 

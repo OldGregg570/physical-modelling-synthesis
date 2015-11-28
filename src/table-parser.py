@@ -1,10 +1,28 @@
+'''
+Wave output code copied from:
+    http://codingmess.blogspot.com/2008/07/how-to-make-simple-wav-file-with-python.html
+'''
+
 import sys
 import pyaudio
 import numpy as np
+import wave
+
 
 p           = pyaudio.PyAudio()
 F           = pyaudio.paFloat32
 R, D        = 44100, 3.0
+
+class SoundFile:
+    def  __init__(self, signal):
+        self.file = wave.open('test.wav', 'wb')
+        self.signal = signal
+        self.sr = 44100
+
+    def write(self):
+        self.file.setparams((1, 2, self.sr, 44100 * 4, 'NONE', 'noncompressed'))
+        self.file.writeframes(self.signal)
+        self.file.close()
 
 def parse_data_table(data_file):
     # Read each line in the file
@@ -37,15 +55,47 @@ def output_note(timbre):
     # Returns a sine osc
     hzosc = lambda f: (sin(f)).astype(np.float32)
 
-    # Set up the audio output stream
-    ostream = p.open(format = F, channels = 1, rate = R, output = True)
-
     # Build the waveform from the table harmonics
     waveform = 0.0
     for harmonic in timbre:
         waveform += (float(harmonic[1]) * hzosc(float(harmonic[0])))
 
+
+    output_to_fs (waveform)
+    output_to_soundcard (waveform)
+
+
+def output_to_fs (waveform):
+    # let's prepare signal
+    duration    = 4 # seconds
+    samplerate  = 44100 # Hz
+    samples     = duration*samplerate
+    frequency   = 440 # Hz
+    period      = samplerate / float(frequency) # in sample points
+    omega       = np.pi * 2 / period
+
+    xaxis       = np.arange(int(period),dtype = np.float) * omega
+    ydata       = 16384 * waveform
+
+    signal      = np.resize(ydata, (samples,))
+
+    ssignal     = ''
+
+    for i in range(len(signal)):
+       ssignal += wave.struct.pack('h',signal[i]) # transform to binary
+
+    f = SoundFile(ssignal)
+    f.write()
+
+    print 'file written'
+
+
+def output_to_soundcard (waveform):
     # Output the sound
+
+    # Set up the audio output stream
+    ostream = p.open(format = F, channels = 1, rate = R, output = True)
+
     ostream.write(waveform)
 
     # Cleanup
