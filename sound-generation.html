@@ -19,11 +19,38 @@
     <div class="container">
       <h1>Generating the Sound</h1>
       <p>
+       This page covers the script that parses the output modal-analysis data table. In addition,
+       this script outputs audo to both the soundcard and a .wav file. First, this document will include
+       an overview of what the script is actually doing. Then, a quick set of shell commands is presented.
+       These commands can be executed to convert any modal analysis data table to a sound wave.
+      </p>
+
+      <h2>The Script</h2>
+      <p>
        First, the data table from the previous section is parsed. Each row of this table includes
        the modal frequency, and three columns representing a participation in the x, y, and z
        directions. The parser determines the length of the three-dimensional vector to produce
-       a table of frequency-loudness pairs.
+       a table of frequency-loudness pairs. The following is the example data table from the previous
+       experiment:
       </p>
+
+      <table class="table">
+       <thead>
+        <tr><th>Frequency</th><th>Participation X</th><th>Participation Y</th><th>Participation Z</th></tr>
+       </thead>
+
+       <tbody>
+
+        <tr><td>Mode 1: 493.9 Hz</td><td>0.000002114</td><td>12.6172289</td><td>0.000000597</td></tr>
+        <tr><td>Mode 2: 527.4 Hz</td><td>0.030473282</td><td>0.000940463</td><td>0.000000345</td></tr>
+        <tr><td>Mode 3: 1898 Hz</td><td>0.00000109</td><td>37.5879169</td><td>0.000035183</td></tr>
+        <tr><td>Mode 4: 2764 Hz</td><td>0.117449067</td><td>0.000067549</td><td>0.000000024</td></tr>
+        <tr><td>Mode 5: 2977 Hz</td><td>0.000000271</td><td>0.000085461</td><td>0.045963418</td></tr>
+        <tr><td>Mode 6: 4299 Hz</td><td>0.000094173</td><td>0.058399909</td><td>0.000035879</td></tr>
+        <tr><td>Mode 7: 4515 Hz</td><td>0.000006087</td><td>3.564265</td><td>0.001703042</td></tr>
+        <tr><td>Mode 8: 4520 Hz</td><td>0.000129198</td><td>6.31028861</td><td>0.000835501</td></tr>
+       </tbody>
+      </table>
 
       <p>
        Then, the loudness values are normalized. The resulting amplitude column of the output

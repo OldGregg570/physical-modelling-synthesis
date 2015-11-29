@@ -26,9 +26,13 @@
       </p>
 
       <p>
-       The following pseudocode describes the entire modelling process:
+       The following pseudocode describes the entire modelling process. The dimensions of the bar
+       are represented with the variables L, W, and H for length, width, and height, respectively:
       </p>
-      <pre><code class="python"># Sketch the rectangular outline
+      <pre><code class="python">HOLE_SIZE = 0.4
+IDIOPHONE_NODE_RATIO = 0.2242
+
+# Sketch the rectangular outline
 sketch_line (Point (0, 0, 0), Point (L, 0, 0))
 sketch_line (Point (L, 0, 0), Point (L, H, 0))
 sketch_line (Point (L, H, 0), Point (0, H, 0))
@@ -36,8 +40,8 @@ sketch_line (Point (0, H, 0), Point (0, 0, 0))
 
 # Sketch the holes
 hole_offset = L * IDIOPHONE_NODE_RATIO
-sketch_circle (Point ( hole_offset, H / 2, 0), 0.4)
-sketch_circle (Point ( L - hole_offset, H / 2, 0), 0.4)
+sketch_circle (Point ( hole_offset, H / 2, 0), HOLE_SIZE)
+sketch_circle (Point ( L - hole_offset, H / 2, 0), HOLE_SIZE)
 
 # Sketch the arc
 points = []
@@ -61,14 +65,15 @@ create_extrude (W)</code></pre>
       <p>
        To run the script in Fusion 360:
        <ol>
-        <li> Save <a href="https://raw.githubusercontent.com/OldGregg570/physical-modelling-synthesis/master/src/idiophone-bar.py">this</a> script somewhere </li>
+        <li> Save <a href="https://raw.githubusercontent.com/OldGregg570/physical-modelling-synthesis/master/src/idiophone-bar.py">this</a>
+         script somewhere with the name <code>idiophone-bar.py</code></li>
         <li> Start Fusion 360 </li>
-        <li> From the menu, select ADD-INS > Scripts and Add-ins ... </li>
-        <li> Click the green "+" icon </li>
-        <li> Browse to the previously save script and click "open" </li>
-        <li> Select the added script and click "run" </li>
+        <li> From the menu, select <code>ADD-INS > Scripts and Add-ins ...</code> </li>
+        <li> Click the green <code>+</code> icon </li>
+        <li> Browse to the previously save script and click <code>open</code> </li>
+        <li> Select the added script and click <code>run</code> </li>
        </ol>
-
+        FIX THIS WORKFLOW!!!!!!!
       </p>
     </div>
 
