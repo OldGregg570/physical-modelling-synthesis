@@ -16,26 +16,37 @@
     <div class="container">
       <h1>Running Modal Analysis </h1>
       <p>
-      Next, we are going to simulate the vibraphone bar as if it were resonating.
-      We import the model into our simulation software, mesh it, apply pin constraints where necessary,
-      and apply a
-      material. Then we change options under manage in order to determine how many overtones we want to simulate.
-      80 overtones took
-      about half an hour to simulate. 20 overtones sounds a bit less natural,
-      but takes only three minutes to simulate on my machine. Depending on what sound you are looking for, I
-      recommend first testing it with less overtones, and when you feel like you are going in the right
-      direction, bump it up to 300, hit start, and go grab a coffee. Since we probably won't exceed a bitrate
-      of 44.1khz, we can set our simulation up to only solve for modes with a frequency within the range of
-      our audio quality. This means our upper limit should be 22050hz, half the bitrate.
-      </p>
+      This page describes the modal analysis process using Fusion 360. The result of this
+      process is the harmonic content derived from a computer model. The actual output of
+      the process is a table of frequency-vector pairs.
+     </p>
+
+     <p>
+      At a high level, the steps are as follows:
+      <ol>
+       <li> apply material properties to existing model </li>
+       <li> apply constraints         </li>
+       <li> generate a mesh           </li>
+       <li> run the simulation        </li>
+      </ol>
+
+     </p>
+     <p>
+      The following is a video of the process:
+     </p>
+     <p>
+      <video width="761" height="450" controls>
+        <source src="./res/modal-sim.mp4" type="video/mp4">
+         Your browser does not support the video tag.
+      </video>
+     </p>
 
       <p>
-      After everything solves, we can move
-      on to the results. This is where things start getting interesting. Via a dropdown menu,
-      you can examine how each of the overtones distorts the model. At first, things look quite similar to
-      our diagram of guitar string overtones.
+      As shown in the video, a dropdown menu lets us examine how each of the overtones distorts
+      the model.
       </p>
-      <div class="center">
+
+      <div class="centered">
 
       	<img src="./res/vibe-mode-one.png" width="400px"></img><br>
       	<i>
@@ -47,106 +58,60 @@
       	</i>
       	<img src="./res/vibe-mode-three.png" width="400px"></img><br>
       	<i>
-      	A side view of the second overtone (third mode)<br>
+      	A side view of the second overtone<br>
       	</i>
-      </div>
-      <p>
-      Unlike our two-dimensional representation of a string, this model has harmonics running
-      through it in three dimensions. We don’t see three-dimensional warpage until we get to some of
-      the higher harmonics.
-      </p>
-      <div class="center">
       	<img src="./res/vibe-mode-fourteen.png" width="400px"></img><br>
       	<i>
-      	Fig. 3.5: A perspective view of the thirteenth overtone (fourteenth mode)<br>
+      	A perspective view of the thirteenth overtone<br>
       	</i>
       	<img src="./res/vibe-mode-nineteen.png" width="400px"></img><br>
       	<i>
-      	Fig. 3.6: A top view of the eighteenth overtone (nineteenth mode)<br>
+      	A top view of the eighteenth overtone<br>
       	</i>
       </div>
       <p>
-      	<i>Note: Since the fundamental mode is not considered an overtone, when I say "overtone
-      	eighteen" I am talking about mode nineteen. Sorry if this is a bit confusing.</i>
       </p>
       </p>
-      Keep in mind that the displacement here is heavily exaggerated. Otherwise, with the exception
-      of the first few modes, it would be very hard to see any warpage. Looking through the
-      modes from 1 to 20, it becomes apparent that the force required to deform the model increases.
-      For example, bending the bar to look like mode 19 would be far more difficult than bending it
-      to look like mode 1. This is a good visualization of how harmonic decay occurs in a solid body.
+      Keep in mind that the displacement here is heavily exaggerated. Otherwise, it would be very
+      hard to see any warpage. Looking through the modes from 1 to 20, it becomes apparent that
+      the force required to deform the model increases. For example, bending the bar to look like
+      mode 19 would be far more difficult than bending it to look like mode 1. This is a good
+      visualization of how harmonic decay occurs in a solid body.
       </p>
       <p>
-      Once you are done exploring all of the cool overtones running through your model, click
-      the report command, and then click preview. This is where we are going to get our actual
-      data to work with. A browser window should open displaying the results of the simulation.
-      Scroll on down to <i>Result Summary</i>, and copy the table into a blank file. Omit the header row so
-      the data looks like the table in <i>Fig. 3.7</i>.
+       To access the resulting simulation data, click on RESULTS > Report. Check the box next to
+       the study you wish to see the results for, click "Select All," and then click "Preview."
+      </p>
+      <p>
+       This should open a webpage. Navigate down to a section called "Result Summary." This is
+       where the data we are interested in resides. You should see a table with data that looks
+       something like this:
       </p>
 
-      <div class="center">
-      	<table style="margin:auto" style="width:500px">
-      		<tr>
-      			<td>Mode 1: 315.3 Hz</td>
-      			<td>0.000000363</td>
-      			<td>0.486106239</td>
-      			<td>0.000001727</td>
-      		</tr>
-      		<tr>
-      			<td>Mode 2: 690.5 Hz</td>
-      			<td>0.000001465</td>
-      			<td>0.007727362</td>
-      			<td>0.003820182</td>
-      		</tr>
-      		<tr>
-      			<td>Mode 3: 1339 Hz</td>
-      			<td>0.00001246</td>
-      			<td>54.2734802</td>
-      			<td>0.000000009</td>
-      		</tr>
-      		<tr>
-      			<td>Mode 4: 2249 Hz</td>
-      			<td>0.003058177</td>
-      			<td>0.000350695</td>
-      			<td>0.036234496</td>
-      		</tr>
-      		<tr>
-      			<td>Mode 5: 2324 Hz</td>
-      			<td>0.099320943</td>
-      			<td>0.000145085</td>
-      			<td>0.000751216</td>
-      		</tr>
-      		<tr>
-      			<td>Mode 6: 3719 Hz</td>
-      			<td>0.019249949</td>
-      			<td>1.31738205</td>
-      			<td>0.000004251</td>
-      		</tr>
-      		<tr>
-      			<td>Mode 7: 3850 Hz</td>
-      			<td>0.018746624</td>
-      			<td>0.000102334</td>
-      			<td>0.000007663</td>
-      		</tr>
-      		<tr>
-      			<td>Mode 8: 4034 Hz</td>
-      			<td>0.043879572</td>
-      			<td>8.35887417</td>
-      			<td>0.000004925</td>
-      		</tr>
-      	</table><br>
-      	<i>
-      		Fig. 3.7: The first eight rows of the harmonic content data table
-      	</i>
-      </div>
+      <table class="table">
+       <thead>
+        <tr><th>Frequency</th><th>Participation X</th><th>Participation Y</th><th>Participation Z</th></tr>
+       </thead>
+
+       <tbody>
+
+        <tr><td>Mode 1: 493.9 Hz</td><td>0.000002114</td><td>12.6172289</td><td>0.000000597</td></tr>
+        <tr><td>Mode 2: 527.4 Hz</td><td>0.030473282</td><td>0.000940463</td><td>0.000000345</td></tr>
+        <tr><td>Mode 3: 1898 Hz</td><td>0.00000109</td><td>37.5879169</td><td>0.000035183</td></tr>
+        <tr><td>Mode 4: 2764 Hz</td><td>0.117449067</td><td>0.000067549</td><td>0.000000024</td></tr>
+        <tr><td>Mode 5: 2977 Hz</td><td>0.000000271</td><td>0.000085461</td><td>0.045963418</td></tr>
+        <tr><td>Mode 6: 4299 Hz</td><td>0.000094173</td><td>0.058399909</td><td>0.000035879</td></tr>
+        <tr><td>Mode 7: 4515 Hz</td><td>0.000006087</td><td>3.564265</td><td>0.001703042</td></tr>
+        <tr><td>Mode 8: 4520 Hz</td><td>0.000129198</td><td>6.31028861</td><td>0.000835501</td></tr>
+       </tbody>
+      </table>
+
       <p>
-      This data was derived from the aluminum 360x60mm vibraphone bar from above. The first column
-      contains the frequency for each mode. The other three columns contain the x, y,
-      and z participation factors for each mode. Based on these values, I am pretty sure
-      we can make an educated guess as to how loud the harmonic will be in the final
-      waveform by calculating the magnitude of the resulting vector in 3-space. After
-      parsing this table in Python and building an array of frequencies and amplitude
-      pairs, we can now begin to construct a waveform.
+      The first column contains the frequency for each mode. The other three columns contain the x, y,
+      and z mass participation factors for each mode. Based on these values, we can approximate
+      how loud the harmonic will be in the final waveform. Copy this table and save it in a file
+      like <a href="./res/data-table-example">this</a>. Do not include the table header in this file.
+      This is the data file from which the sound wave will be built.
       </p>
     </div>
 

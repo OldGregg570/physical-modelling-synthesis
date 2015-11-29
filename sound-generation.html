@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="./lib/styles/github.css">
+    <script src="./lib/highlight.js"></script>
+
+    <title>physical-modelling-synthesis</title>
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <div class="container">
+      <h1>Generating the Sound</h1>
+      <p>
+       First, the data table from the previous section is parsed. Each row of this table includes
+       the modal frequency, and three columns representing a participation in the x, y, and z
+       directions. The parser determines the length of the three-dimensional vector to produce
+       a table of frequency-loudness pairs.
+      </p>
+
+      <p>
+       Then, the loudness values are normalized. The resulting amplitude column of the output
+       should have a sum close to 1.0. Finally, a harmonic serries of sine waves is assembled and
+       output to both the soundcard and the filesystem (as a .wav file). The code can be found
+<a href="https://github.com/OldGregg570/physical-modelling-synthesis/blob/master/src/table-parser.py">here</a>.
+      </p>
+
+
+      <h2> Usage </h2>
+      <p>
+       To run the script:
+       <pre><code>$ git clone https://github.com/OldGregg570/physical-modelling-synthesis.git
+$ cd physical-modelling-synthesis
+$ python src/table-parser.py sample_data/sample_data</code></pre>
+
+       To use your own data table, replace the "sample_data/sample_data" portion with a path to
+       your file. Using <a href="./res/data-table-example">this</a> table, the following sound
+       is produced.
+
+
+      </p>
+      THE SOUND FILE!!!
+
+    </div>
+
+
+
+  </body>
+</html>
