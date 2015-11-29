@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>physical-modelling-synthesis</title>
+
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="container">
+      <h1>Isolating the Bar</h1>
+      <p>
+       An experiment was carried out to better understand the difference between the sound
+       created by the vibraphone mallet and the bar. The goal for this experiment is to
+       determine if it is possible to isolate the resonant portion of a sound in order to
+       compare it with our simulated sound. The following outlines the experiment background,
+       procedure, and results.
+      </p>
+
+      <h3>Background</h3>
+      <p>
+       The following is a recording of a vibraphone playing a B4:
+      </p>
+      <audio controls>
+       <source src="../res/vibraphone-full.wav" type="audio/wav">
+      </audio>
+      <p>
+      The following is the same recording with the first 100ms trimmed off:
+      </p>
+      <audio controls>
+       <source src="../res/vibraphone-no-impact.wav" type="audio/wav">
+      </audio>
+
+      <p>
+       This experiment compares the harmonic spectrums of these tones. The initial loud impact
+       of the bar brings out some of the brighter overtones during the first fraction of a
+       second. Additionally, and perhaps more noticeably, the sound of the mallet or stick
+       greatly influences the perceived timbre.
+      </p>
+
+      <h3>Procedure</h3>
+      <p>
+       The following tools and inputs are required for this experiment:
+       <ul>
+        <li><a href="https://github.com/audacity/audacity">Audaciy</a></li>
+        <li><a href="https://www.freesound.org/people/Komponist/sounds/33188/">A Vibraphone Note Recording</a></li>
+       </ul>
+
+       The first step is to create a new sound file that is the original with the first fraction
+       of a second clipped off.
+      </p>
+
+      <p>
+       <b>Open the sound file in Audacity:</b>
+       <p><img src="../res/open-sound.gif" style="width: 400px;"></img></p>
+      </p>
+      <p>
+
+       <b>Select the first 0.1 seconds of the track and hit the delete key:</b>
+       <p><img src="../res/trim-sound.gif" style="width: 400px;"></img></p>
+       <i>Note: hold “CTRL” and scroll to zoom in or out</i>
+      </p>
+      <p>
+       Using the two sound files, the harmonic spectrums can be derived using Audacity. The
+       steps are as follows:
+
+       <ol>
+        <li> Open the file in Audacity </li>
+        <li> Select all audio in the track by double clicking it</li>
+        <li> In the menu, select Analyze > Plot Spectrum</li>
+       </ol>
+      </p>
+
+      <h3>Results</h3>
+      <p>
+       With some simple bitmap editing tools, the two plots can be easily compared. The
+       following image shows a comparison of the two audio files. The purple represents the
+       spectrum of the original sound. The green represents the spectrum of the trimmed sound:
+      </p>
+      <p>
+       <img src="../res/impact-resonance-comparison.png" style="width: 600px;"></img>
+      </p>
+      <p>
+       From this graph, we can very easily see the harmonic series. The fundamental tone is
+       visible around 500 hz. Overtones are visible around 1000 hz, 1500 hz, 2000 hz, and
+       2500 hz. These five overtones appear to be approximately harmonic. The trimmed
+       sound clip will be a great approximation for the required isolated resonance that will
+       be compared against the final simulated sound.
+
+      </p>
+      <p>
+
+       <table class="table">
+        <thead>
+         <tr> <th> Analyzed Freq. (hz) </th><th> Expected Freq. (hz) </th> <th> Difference (hz) </th></tr>
+         <tr> <td>497   </td> <td>497  (f)  </td> <td> &nbsp&nbsp&nbsp  0 </td></tr>
+         <tr> <td>993   </td> <td>994  (2f) </td> <td> &nbsp&nbsp      -1 </td></tr>
+         <tr> <td>1489  </td> <td>1491 (3f) </td> <td> &nbsp&nbsp      -2 </td></tr>
+         <tr> <td>1985  </td> <td>1988 (4f) </td> <td> &nbsp&nbsp      -3 </td></tr>
+         <tr> <td>2680  </td> <td>2485 (5f) </td> <td>               +195 </td></tr>
+         <tr> <td>2951  </td> <td>2982 (6f) </td> <td> &nbsp          -31 </td></tr>
+
+        </thead>
+        <tbody>
+        </tbody>
+       </table>
+
+
+      </p>
+
+
+    </div>
+  </body>
+</html>

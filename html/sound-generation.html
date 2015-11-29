@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../lib/styles/github.css">
+    <script src="../lib/highlight.js"></script>
+
+    <title>physical-modelling-synthesis</title>
+
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <div class="container">
+      <h1>Generating the Sound</h1>
+      <p>
+       This page covers the script that parses the output modal-analysis data table. In addition,
+       this script outputs audo to both the soundcard and a .wav file. First, this document will include
+       an overview of what the script is actually doing. Then, a quick set of shell commands is presented.
+       These commands can be executed to convert any modal analysis data table to a sound wave.
+      </p>
+
+      <h2>The Script</h2>
+      <p>
+       First, the data table from the previous section is parsed. Each row of this table includes
+       the modal frequency, and three columns representing a participation in the x, y, and z
+       directions. The parser determines the length of the three-dimensional vector to produce
+       a table of frequency-loudness pairs. The following is the example data table from the previous
+       experiment:
+      </p>
+
+      <table class="table">
+       <thead>
+        <tr><th>Frequency</th><th>Participation X</th><th>Participation Y</th><th>Participation Z</th></tr>
+       </thead>
+
+       <tbody>
+
+        <tr><td>Mode 1: 493.9 Hz</td><td>0.000002114</td><td>12.6172289</td><td>0.000000597</td></tr>
+        <tr><td>Mode 2: 527.4 Hz</td><td>0.030473282</td><td>0.000940463</td><td>0.000000345</td></tr>
+        <tr><td>Mode 3: 1898 Hz</td><td>0.00000109</td><td>37.5879169</td><td>0.000035183</td></tr>
+        <tr><td>Mode 4: 2764 Hz</td><td>0.117449067</td><td>0.000067549</td><td>0.000000024</td></tr>
+        <tr><td>Mode 5: 2977 Hz</td><td>0.000000271</td><td>0.000085461</td><td>0.045963418</td></tr>
+        <tr><td>Mode 6: 4299 Hz</td><td>0.000094173</td><td>0.058399909</td><td>0.000035879</td></tr>
+        <tr><td>Mode 7: 4515 Hz</td><td>0.000006087</td><td>3.564265</td><td>0.001703042</td></tr>
+        <tr><td>Mode 8: 4520 Hz</td><td>0.000129198</td><td>6.31028861</td><td>0.000835501</td></tr>
+       </tbody>
+      </table>
+
+      <p>
+       Then, the loudness values are normalized. The resulting amplitude column of the output
+       should have a sum close to 1.0. Finally, a harmonic serries of sine waves is assembled and
+       output to both the soundcard and the filesystem (as a .wav file). The code can be found
+<a href="https://github.com/OldGregg570/physical-modelling-synthesis/blob/master/src/table-parser.py">here</a>.
+      </p>
+
+
+      <h2> Usage </h2>
+      <p>
+       To run the script:
+       <pre><code>$ git clone https://github.com/OldGregg570/physical-modelling-synthesis.git
+$ cd physical-modelling-synthesis
+$ python src/table-parser.py sample_data/sample_data</code></pre>
+
+       To use your own data table, replace the "sample_data/sample_data" portion with a path to
+       your file. Using <a href="../res/data-table-example">this</a> table, the following sound
+       is produced.
+
+
+      </p>
+      THE SOUND FILE!!!
+
+    </div>
+
+
+
+  </body>
+</html>
