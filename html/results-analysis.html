@@ -16,8 +16,47 @@
     <div class="container">
       <h1>Analyzing Results</h1>
       <p>
-      the process is a table of frequency-vector pairs.
+       the following is a spectral comparison of the final generated sound (in orange) and
+       the target sound (purple). By comparing the two spectrums, one is able to observe
+       two classes of error overtones: absent, and extra overtones.
      </p>
+     <p style="padding-left: 200px">
+      <h3>Absent Overtones</h3>
+      There are two overtones contained in the trimmed vibraphone recording that are weak
+      or nonexistent when compared with the harmonic content of the simulation. The
+      first can be found at 1000 hz. The second can be found around 6000 hz.
+
+      <h3>Extra Overtones</h3>
+      The most significant extra overtones shown in Appendix C can be found around 600, 2500,
+      5000, and 6500 Hz.
+     </p>
+
+     <p>
+      Each of these modes has something in common: heavy displacement in the Y direction. As
+      shown in the following image, this displacement causes the bar to warp in such a way
+      that the two holes in the bar are pulled toward one another. This appears to be where
+      the fixed pinned constraints have an effect on the resulting harmonicity.
+     </p>
+
+
+<p>
+ As shown in Appendix C, with the exception of the numerous extra overtones, the simulated sound
+ appears to roughly approximate the timbre of the trimmed vibraphone sample. To those who wish
+ to expand upon the experiments in Appendix A, a good place to start exploring would be to
+ find some way to simulate the constraining nature of the vibraphone string. As shown in the
+ extra overtones from Appendix B, pinned constraints appear to be much too rigid to
+ accurately simulate some of the overtones.
+
+Based on the conditions that influence the output of the simulation (See Modal Analysis,) it may be interesting to compare and measure harmonicity differences for different:
+<ul>
+ <li>materials</li>
+ <li>shapes</li>
+ <li>bar sizes</li>
+ <li>constraints</li>
+ <li>instruments</li>
+</ul>
+
+</p>
     </div>
 
 
