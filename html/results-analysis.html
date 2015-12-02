@@ -15,21 +15,68 @@
 
     <div class="container">
       <h1>Analyzing Results</h1>
+
+      <p>
+       The following audio clip is the resulting sound from the simulation. Without volume
+       attack and decay, this hardly sounds like a vibraphone bar. This is expected.
+      </p>
+      <p><i>
+       Warning: turn the volume on your computer down before playing
+      </i></p>
+
+      <audio controls>
+       <source src="../res/final-sound.wav" type="audio/wav">
+      </audio>
+
+     <p>
+      And the trimmed vibraphone bar:
+     </p>
+      <audio controls>
+       <source src="../res/vibraphone-no-impact.wav" type="audio/wav">
+      </audio>
+
+
       <p>
        the following is a spectral comparison of the final generated sound (in orange) and
        the target sound (purple). By comparing the two spectrums, one is able to observe
        two classes of error overtones: absent, and extra overtones.
      </p>
-     <p style="padding-left: 200px">
+     <img src="../res/final-comparison.png"></img>
       <h3>Absent Overtones</h3>
-      There are two overtones contained in the trimmed vibraphone recording that are weak
+      <p>
+       There are two overtones contained in the trimmed vibraphone recording that are weak
       or nonexistent when compared with the harmonic content of the simulation. The
       first can be found at 1000 hz. The second can be found around 6000 hz.
+     </p>
+     <table class="table">
+      <thead>
+       <tr> <th>Mode # </th> <th> Frequency (Hz) </th> <th> Model Displacement</th> </tr>
+      </thead>
+      <tbody>
+       <tr> <td> 2</td> <td> 527.2 </td> <td><img src="../res/final-mode-two.png"></img> </td> </tr>
+       <tr> <td>10</td> <td>6294.0 </td> <td><img src="../res/final-mode-ten.png"></img> </td> </tr>
+       <tr> <td>11</td> <td>6304.0 </td> <td><img src="../res/final-mode-eleven.png"></img> </td> </tr>
+      </tbody>
+     </table>
+
+
 
       <h3>Extra Overtones</h3>
-      The most significant extra overtones shown in Appendix C can be found around 600, 2500,
+      <p>
+      The most significant extra overtones shown below can be found around 600, 2500,
       5000, and 6500 Hz.
      </p>
+
+     <table class="table">
+      <thead>
+       <tr> <th>Mode # </th> <th> Frequency (Hz) </th> <th> Model Displacement</th> </tr>
+      </thead>
+      <tbody>
+       <tr> <td> 4</td> <td>2763.0 </td> <td><img src="../res/final-mode-four.png"></img> </td> </tr>
+       <tr> <td> 9</td> <td>4843.0 </td> <td><img src="../res/final-mode-nine.png"></img> </td> </tr>
+       <tr> <td>12</td> <td>6769.0 </td> <td><img src="../res/final-mode-twelve.png"></img> </td> </tr>
+      </tbody>
+     </table>
 
      <p>
       Each of these modes has something in common: heavy displacement in the Y direction. As
