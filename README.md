@@ -1,5 +1,6 @@
 # physical-modelling-synthesis
-Scripts to automate building a SAL expression from a modal analysis harmonic content data table
+* a script that builds a Python pyaudio expression from a modal analysis harmonic content data table (see __Project Documentation__)
+* a script to automate solid modelling an idiophone bar
 
 ![Crash Cymbal Modes](https://raw.githubusercontent.com/OldGregg570/physical-modelling-synthesis/master/docs/crash_modes_complete.gif)
 
