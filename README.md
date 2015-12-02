@@ -5,3 +5,9 @@ Scripts to automate building a SAL expression from a modal analysis harmonic con
 
 # Usage
     python src/table-parser.py data/sample_data
+
+
+# Project Documentation
+    The project site can be found here:
+    
+    [gh-pages] (http://oldgregg570.github.io/physical-modelling-synthesis/)
