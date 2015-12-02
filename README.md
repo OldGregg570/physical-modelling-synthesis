@@ -9,6 +9,6 @@
 
 
 # Project Documentation
-    The project site can be found here:
+The project site can be found here:
     
-    [gh-pages] (http://oldgregg570.github.io/physical-modelling-synthesis/)
+[gh-pages] (http://oldgregg570.github.io/physical-modelling-synthesis/)
